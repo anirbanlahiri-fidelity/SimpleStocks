@@ -13,17 +13,8 @@ class Stocks:
         self.stocks_df.set_index('StockSymbol', inplace=True)
         self.trades_df = pd.DataFrame(columns=['StockSymbol', 'Timestamp', 'Quantity',
                                                'Buy_Sell', 'Price'])
-        # self.vwap = pd.DataFrame(columns=['StockSymbol', 'Timestamp')
-        # self.trades_df.set_index('StockSymbol', inplace=True)
-        # print(self.stocks_df)
-        # return df
-
+        
     def get_dividend_yield(self, stock_symbol, market_price):
-        # print(list(df))
-        # print(df.loc[StockSymbol][1])
-        # print(df.loc[(StockSymbol, 'LastDividend')])
-        # print(self.stocks_df.loc[stock_symbol]['LastDividend'])
-        # last_dividend = data_frame.loc[stock_symbol]['LastDividend']
         try:
             if self.stocks_df.loc[stock_symbol]['Type'] == 'Common':
                 dividend_yield = self.stocks_df.loc[stock_symbol]['LastDividend'] / \
