@@ -52,7 +52,6 @@ class StocksTestCase(unittest.TestCase):
         weighted_stock_price = self.stocks.calc_weighted_stock_price('POP',
                                                                      current_date_time)
         self.assertEqual(weighted_stock_price, 150)
-        print('Weighted stock price :', weighted_stock_price)
 
 
 

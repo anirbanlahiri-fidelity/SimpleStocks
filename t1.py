@@ -53,14 +53,11 @@ class Stocks:
     def calc_weighted_stock_price(self, stock_symbol, current_time):
         total_volume = 0
         volume_weighted_total = 0
-        print("Sifting through the trades_df : ")
         for index, row in self.trades_df.iterrows():
             time_elapsed = current_time - row['Timestamp']
             if (stock_symbol == row['StockSymbol']) and \
                     (time_elapsed < datetime.timedelta(minutes=15)):
                 # update the totals
-                print(row)
-                print("Time Elapsed: ", time_elapsed)
                 total_volume += row['Quantity']
                 volume_weighted_total += row['Quantity'] * row['Price']
         if total_volume == 0:
