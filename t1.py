@@ -67,6 +67,42 @@ class Stocks:
         else:
             return volume_weighted_total / total_volume
 
+    def calc_share_index(self):
+        # self.trades_df.set_index('StockSymbol', inplace=True)
+        print(self.trades_df)
+        print(self.stocks_df)
+        price_product = 1
+        for index, row in self.stocks_df.iterrows():
+            stock_symbol = index
+            print("Stock Symbol : ", stock_symbol)
+
+            # the default transaction_date indicates the date
+            # when GBCE came into existence
+            transaction_date = datetime.datetime(1800, 12, 2)
+            # default stock price is assume to be 1
+            # to help compute geometric mean - if no trades exist on that stock
+            stock_price = 1
+            # trades_for_stock = self.trades_df[stock_symbol]
+            trades_for_stock = self.trades_df.loc[self.trades_df['StockSymbol']
+                                                  == stock_symbol]
+            print(trades_for_stock)
+            for index_trade, row_trade in trades_for_stock.iterrows():
+                if (stock_symbol == row_trade['StockSymbol']) and \
+                        (transaction_date < row_trade['Timestamp']):
+                    transaction_date = row_trade['Timestamp']
+                    stock_price = row_trade['Price']
+
+            price_product *= stock_price
+
+        print("Price Product : ", price_product)
+        print("Number of Stocks :", self.stocks_df.shape[0])
+        print("Geometric Mean : ", price_product**(1/float(self.stocks_df.shape[0])))
+
+        return price_product**(1/float(self.stocks_df.shape[0]))
+
+
+
+
     def show_stocks(self):
         print(self.stocks_df)
 
