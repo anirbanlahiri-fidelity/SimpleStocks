@@ -26,6 +26,7 @@ class StocksTestCase(unittest.TestCase):
         self.assertEqual(self.stocks.get_p_e_ratio('TEA', 100), -1)
 
     def test_trade(self):
+        """Test the trading mechanism stock_trade"""
         # Note: A slightly older version of Pandas is used since
         # the current freezegun version is incompatible with current pandas version
         current_date_time = datetime.datetime.now()
@@ -44,6 +45,7 @@ class StocksTestCase(unittest.TestCase):
             self.assertEqual(trade_data_dict, trade_data)
 
     def test_weighted_stock_price(self):
+        """Test the weighted stock price calculation function calc_weighted_stock_price"""
         with freeze_time('2000-1-1'):
             # this trade should not be taken into account
             # since earlier than 15 minutes
@@ -57,6 +59,7 @@ class StocksTestCase(unittest.TestCase):
         self.assertEqual(weighted_stock_price, 150)
 
     def test_share_index(self):
+        """Test the share index calculation function calc_share_index"""
         self.stocks.stock_trade('POP', 50, 'buy', 100)
         self.stocks.stock_trade('TEA', 10, 'buy', 110)
         self.stocks.stock_trade('ALE', 20, 'buy', 500)

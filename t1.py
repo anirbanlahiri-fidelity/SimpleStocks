@@ -1,5 +1,4 @@
 import pandas as pd
-import numpy as np
 import datetime
 
 
@@ -62,7 +61,7 @@ class Stocks:
             # the default transaction_date indicates the date
             # when GBCE came into existence
             transaction_date = datetime.datetime(1800, 12, 2)
-            # default stock price is assume to be 1
+            # default stock price is assumed to be 1
             # to help compute geometric mean - if no trades exist on that stock
             stock_price = 1
             # trades_for_stock = self.trades_df[stock_symbol]
@@ -88,4 +87,3 @@ class Stocks:
 if __name__ == "__main__":
     stocks = Stocks()
     stocks.show_stocks()
-    print('Dividend yield : ', stocks.get_dividend_yield('POP', 100))
