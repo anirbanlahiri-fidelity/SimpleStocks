@@ -33,13 +33,14 @@ class StocksTestCase(unittest.TestCase):
             self.stocks.stock_trade('POP', 10, 'buy', 100)
             self.assertEqual(self.stocks.trades_df.shape[0], 1)
             trade_data = {'StockSymbol': 'POP',
+                          'Timestamp': datetime.datetime.now(),
                           'Quantity': 10,
                           'Buy_Sell': 'buy',
                           'Price': 100}
-            trade_data_retrieved = self.stocks.trades_df.iloc[[0], [0, 2, 3, 4]].to_dict()
-            print(trade_data_retrieved)
-            trade_data_dict = {key: value[0] for key, value in trade_data_retrieved.items()}
-            print("trade_data_dict : ", trade_data_dict)
+            trade_data_retrieved = self.stocks.trades_df.iloc[[0],
+                                                              [0, 1, 2, 3, 4]].to_dict()
+            trade_data_dict = {key: value[0] for key, value in
+                               trade_data_retrieved.items()}
             self.assertEqual(trade_data_dict, trade_data)
 
     def test_weighted_stock_price(self):
@@ -55,14 +56,16 @@ class StocksTestCase(unittest.TestCase):
                                                                      current_date_time)
         self.assertEqual(weighted_stock_price, 150)
 
-    def test_weighted_stock_price(self):
+    def test_share_index(self):
         self.stocks.stock_trade('POP', 50, 'buy', 100)
         self.stocks.stock_trade('TEA', 10, 'buy', 110)
         self.stocks.stock_trade('ALE', 20, 'buy', 500)
         self.stocks.stock_trade('POP', 3, 'buy', 300)
         self.stocks.stock_trade('GIN', 15, 'buy', 327.56)
         self.stocks.stock_trade('JOE', 500, 'buy', 201.51)
-        self.stocks.calc_share_index()
+        share_index = self.stocks.calc_share_index()
+        self.assertEqual(share_index, 255.51375357750982)
+
 
 
 
