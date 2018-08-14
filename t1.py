@@ -54,7 +54,6 @@ class Stocks:
             return volume_weighted_total / total_volume
 
     def calc_share_index(self):
-        # self.trades_df.set_index('StockSymbol', inplace=True)
         price_product = 1
         for index, row in self.stocks_df.iterrows():
             stock_symbol = index
@@ -64,7 +63,6 @@ class Stocks:
             # default stock price is assumed to be 1
             # to help compute geometric mean - if no trades exist on that stock
             stock_price = 1
-            # trades_for_stock = self.trades_df[stock_symbol]
             trades_for_stock = self.trades_df.loc[self.trades_df['StockSymbol']
                                                   == stock_symbol]
             for index_trade, row_trade in trades_for_stock.iterrows():
